@@ -1,15 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="css/style.css">
     <title>Blog Manager</title>
   </head>
-  <body>
+  <body class="body">
     <!--navbar-->
     <header>
       <nav>
         <h2>Blog Manager</h2>
 
-        <ul>
+        <ul class="nav-links">
           <li>
             <a href="index.html"> Home </a>
           </li>
@@ -31,34 +32,106 @@
     <!--navbar ended-->
 
     <!--main section started-->
-    <main>
-      <section>
-        <h1>Manage Your Blogs Easily</h1>
+<main>
 
-        <p>Create, edit and manage your blog posts.</p>
+    <section class="hero">
 
-        <a href="add-blog.html"> Create New Blog </a>
-      </section>
-    </main>
+        <div class="hero-text">
+
+            <h1>Welcome to Blog Manager</h1>
+
+            <p>
+                Create, manage and share your ideas with a clean and
+                easy-to-use blogging platform.
+            </p>
+
+            <a href="add-blog.html" class="hero-btn">
+                Create New Blog
+            </a>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img src="images/blog_writing_img.jpg" alt="Blog Illustration">
+
+        </div>
+
+    </section>
+
+</main>
     <!--main secion ended-->
     <!--add blog scection startrd-->
-    <section id="blogs">
-      <h2>Latest Blogs</h2>
+    <section class="blogs" id="blogs">
 
-      <div>
-        <h3>Sample Blog Title</h3>
+    <h2>Latest Blogs</h2>
 
-        <p>This is a sample blog description.</p>
+    <div class="blog-container">
 
-        <p>Author: Admin</p>
+        <div class="blog-card">
 
-<a href="edit-blog.html">
-Edit
-</a>
-        <button>Delete</button>
-      </div>
-    </section>
-    <!--add blog section is ended-->
+            <img src="images/blog_img (1).jpg" alt="Blog">
+
+            <div class="card-content">
+
+                <h3>Sample Blog Title</h3>
+
+                <p>
+                    This is a sample blog description.
+                </p>
+
+                <p><strong>Author:</strong> Admin</p>
+
+                <a href="#">Read More</a>
+
+            </div>
+
+        </div>
+
+        <div class="blog-card">
+
+            <img src="images/blog_img (2).jpg" alt="Blog">
+
+            <div class="card-content">
+
+                <h3>Another Blog</h3>
+
+                <p>
+                    Sample description for another blog.
+                </p>
+
+                <p><strong>Author:</strong> Admin</p>
+
+                <a href="#">Read More</a>
+
+            </div>
+
+        </div>
+
+        <div class="blog-card">
+
+            <img src="images/blog_img (3).jpg" alt="Blog">
+
+            <div class="card-content">
+
+                <h3>Latest News</h3>
+
+                <p>
+                    Sample description for latest blog.
+                </p>
+
+                <p><strong>Author:</strong> Admin</p>
+
+                <a href="#">Read More</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!--add blog section is ended-->
     <!--footer started-->
     <footer>
       <p>© 2026 Blog Manager</p>
