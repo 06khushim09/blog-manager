@@ -1,23 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
+  <head>
+    <link rel="stylesheet" href="css/style.css" />
 
     <title>Add Blog - Blog Manager</title>
-
-</head>
+  </head>
+  <body>
     <!--navbar-->
     <header>
       <nav>
         <h2>Blog Manager</h2>
 
-        <ul>
+        <ul class="nav-links">
           <li>
             <a href="index.html"> Home </a>
           </li>
 
           <li>
-            <a href="add-blog.html"> Add Blog </a>
+            <a href="add-blog.html" class="active"> Add Blog </a>
           </li>
 
           <li>
@@ -31,88 +31,54 @@
       </nav>
     </header>
     <!--navbar ended-->
+
     <!--main started-->
     <main>
+      <section class="page-header">
+        <h1>Create New Blog</h1>
+        <p>Share your ideas with the world.</p>
+      </section>
 
+      <section class="form-container">
+        <form>
+          <label> Blog Title </label>
 
-<section>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Enter your Blog Title"
+          />
 
+          <label> Author Name </label>
 
-<h1>
-Create New Blog
-</h1>
+          <input
+            type="text"
+            id="author"
+            name="author"
+            placeholder="Enter author name "
+          />
 
+          <label> Blog Content </label>
 
+          <textarea
+            id="content"
+            name="content"
+            placeholder="Start writing your article here..."
+          ></textarea>
+          <label for="image"> Cover Image </label>
 
-<form>
+          <input type="file" id="image" accept="image/*" />
 
-
-<label>
-Blog Title
-</label>
-
-<br>
-
-<input type="text" id="title" name="title">
-
-
-<br><br>
-
-
-
-<label>
-Blog Content
-</label>
-
-<br>
-
-
-<textarea id="content" name="content"></textarea>
-
-
-<br><br>
-
-
-
-<label>
-Author Name
-</label>
-
-<br>
-
-
-<input type="text" id="author" name="author">
-
-
-<br><br>
-
-
-
-<button type="submit">
-Publish Blog
-</button>
-
-
-
-</form>
-
-
-</section>
-
-
-</main>
+          <button type="submit">Publish Blog</button>
+        </form>
+      </section>
+    </main>
     <!--main ended-->
     <!--footer started-->
     <footer>
       <p>© 2026 Blog Manager</p>
     </footer>
     <!--footer ended-->
-
-
-<body>
-
-
-</body>
-
-
+  </body>
 </html>
