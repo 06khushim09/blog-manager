@@ -1,87 +1,137 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="css/style.css" />
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Add Blog - Blog Manager</title>
-  </head>
-  <body>
-    <!--navbar-->
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- =========================
+            Navbar
+    ========================== -->
+
     <header>
-      <nav>
-        <h2>Blog Manager</h2>
 
-        <ul class="nav-links">
-          <li>
-            <a href="index.html"> Home </a>
-          </li>
+        <nav>
 
-          <li>
-            <a href="add-blog.html" class="active"> Add Blog </a>
-          </li>
+            <h2>Blog Manager</h2>
 
-          <li>
-            <a href="index.html#blogs"> View Blogs </a>
-          </li>
+            <ul class="nav-links">
 
-          <li>
-            <a href="login.html"> Login </a>
-          </li>
-        </ul>
-      </nav>
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="add-blog.html" class="active">Add Blog</a></li>
+
+                <li><a href="index.html#blogs">View Blogs</a></li>
+
+                <li><a href="login.html">Login</a></li>
+
+            </ul>
+
+        </nav>
+
     </header>
-    <!--navbar ended-->
 
-    <!--main started-->
+    <!-- =========================
+            Main
+    ========================== -->
+
     <main>
-      <section class="page-header">
-        <h1>Create New Blog</h1>
-        <p>Share your ideas with the world.</p>
-      </section>
 
-      <section class="form-container">
-        <form id="blogForm">
-          <label> Blog Title </label>
+        <section class="page-header">
 
-          <input
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Enter your Blog Title"
-          />
+            <h1>Create New Blog</h1>
 
-          <label> Author Name </label>
+            <p>Share your ideas with the world.</p>
 
-          <input
-            type="text"
-            id="author"
-            name="author"
-            placeholder="Enter author name "
-          />
+        </section>
 
-          <label> Blog Content </label>
+        <section class="form-container">
 
-          <textarea
-            id="content"
-            name="content"
-            placeholder="Start writing your article here..."
-          ></textarea>
-          <p id="charCount">Characters: 0</p>
-          <label for="image"> Cover Image </label>
+            <form id="blogForm">
 
-          <input type="file" id="image" accept="image/*" />
+                <p id="successMessage" class="success"></p>
 
-          <button type="submit">Publish Blog</button>
-        </form>
-      </section>
+                <!-- Blog Title -->
+
+                <label for="title">Blog Title</label>
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Enter your Blog Title"
+                >
+
+                <p id="titleError" class="error"></p>
+
+                <!-- Author -->
+
+                <label for="author">Author Name</label>
+
+                <input
+                    type="text"
+                    id="author"
+                    placeholder="Enter author name"
+                >
+
+                <p id="authorError" class="error"></p>
+
+                <!-- Blog Content -->
+
+                <label for="content">Blog Content</label>
+
+                <p id="charCount">Characters: 0 / 500</p>
+
+                <textarea
+                    id="content"
+                    placeholder="Start writing your article here..."
+                ></textarea>
+
+                <p id="contentError" class="error"></p>
+
+                <!-- Cover Image -->
+
+                <label for="image">Cover Image</label>
+
+                <input
+                    type="file"
+                    id="image"
+                    accept="image/*"
+                >
+
+                <p id="imageError" class="error"></p>
+
+                <button type="submit">
+
+                    Publish Blog
+
+                </button>
+
+            </form>
+
+        </section>
+
     </main>
-    <!--main ended-->
-    <!--footer started-->
+
+    <!-- =========================
+            Footer
+    ========================== -->
+
     <footer>
-      <p>© 2026 Blog Manager</p>
+
+        <p>© 2026 Blog Manager</p>
+
     </footer>
-    <!--footer ended-->
+
     <script src="js/script.js"></script>
+
 </body>
-  </body>
+
 </html>
