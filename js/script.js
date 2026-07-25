@@ -24,15 +24,21 @@ const successMessage = document.getElementById("successMessage");
 // Form Validation
 // ============================
 
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", async function (event) {
 
     event.preventDefault();
 
     let isValid = true;
 
-    // Clear previous success message
-successMessage.textContent = "";
-successMessage.style.display = "none";
+    // Clear previous messages
+    successMessage.textContent = "";
+    successMessage.style.display = "none";
+
+    titleError.textContent = "";
+    authorError.textContent = "";
+    contentError.textContent = "";
+    imageError.textContent = "";
+
     // ============================
     // Blog Title Validation
     // ============================
@@ -40,8 +46,6 @@ successMessage.style.display = "none";
     if (title.value.trim() === "") {
         titleError.textContent = "Please enter blog title.";
         isValid = false;
-    } else {
-        titleError.textContent = "";
     }
 
     // ============================
@@ -51,8 +55,6 @@ successMessage.style.display = "none";
     if (author.value.trim() === "") {
         authorError.textContent = "Please enter author name.";
         isValid = false;
-    } else {
-        authorError.textContent = "";
     }
 
     // ============================
@@ -62,8 +64,6 @@ successMessage.style.display = "none";
     if (content.value.trim() === "") {
         contentError.textContent = "Content cannot be empty.";
         isValid = false;
-    } else {
-        contentError.textContent = "";
     }
 
     // ============================
@@ -73,26 +73,46 @@ successMessage.style.display = "none";
     if (image.files.length === 0) {
         imageError.textContent = "Please upload a cover image.";
         isValid = false;
-    } else {
-        imageError.textContent = "";
     }
 
-    // Stop submission if any validation fails
+    // Stop if validation fails
+
     if (!isValid) {
         return;
     }
 
     // ============================
-    // Success
+    // Send Data to Express Server
     // ============================
 
-successMessage.textContent = "✅ Blog validated successfully!";
-successMessage.style.display = "block";
+    const response = await fetch("/blogs", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            title: title.value,
+            author: author.value,
+            content: content.value
+        })
+    });
 
-    console.log("Title:", title.value);
-    console.log("Author:", author.value);
-    console.log("Content:", content.value);
-    console.log("Image:", image.files);
+    const data = await response.json();
+
+    // ============================
+    // Show Success Message
+    // ============================
+
+    successMessage.textContent = data.message;
+    successMessage.style.display = "block";
+
+    console.log("Server Response:", data);
+
+    // Optional: Clear form after successful submission
+    form.reset();
+
+    // Reset character counter
+    charCount.textContent = "Characters: 0 / 500";
 
 });
 
