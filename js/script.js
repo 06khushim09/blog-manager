@@ -23,7 +23,8 @@ const successMessage = document.getElementById("successMessage");
 // ============================
 // Form Validation
 // ============================
-
+if(form)
+{
 form.addEventListener("submit", async function (event) {
 
     event.preventDefault();
@@ -81,6 +82,7 @@ form.addEventListener("submit", async function (event) {
         return;
     }
 
+
     // ============================
     // Send Data to Express Server
     // ============================
@@ -115,7 +117,10 @@ form.addEventListener("submit", async function (event) {
     charCount.textContent = "Characters: 0 / 500";
 
 });
+}
 
+if(content)
+{
 // ============================
 // Character Counter
 // ============================
@@ -129,3 +134,31 @@ content.addEventListener("input", function () {
     charCount.textContent = `Characters: ${content.value.length} / 500`;
 
 });
+}
+
+//show blogs
+async function loadBlogs() {
+     const response = await fetch("/blogs");
+     const blogs = await response.json();
+    const container = document.getElementById("blogContainer");//documnet represent entire html page
+
+    container.innerHTML = "";
+    blogs.forEach(blog => {
+container.innerHTML += `
+    <div class="blog-card">
+
+        <div class="card-content">
+
+            <h3>${blog.title}</h3>
+
+            <p>${blog.content.substring(0, 100)}...</p>
+            <p><strong>Author:</strong> ${blog.author}</p>
+
+        </div>
+
+    </div>
+`;
+});
+
+}
+loadBlogs();

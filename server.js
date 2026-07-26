@@ -5,16 +5,7 @@ const app = express();
 app.use(express.json());
 
 const PORT = 3000;
- let blogs = [
-        {
-            id: 1,
-            title: "My First Blog"
-        },
-        {
-            id: 2,
-            title: "Learning Express"
-        }
-    ];
+let blogs = [];
 
 
 // Serve HTML, CSS, JS and images
