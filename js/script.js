@@ -5,6 +5,9 @@ console.log("JavaScript Connected!");
 // ============================
 
 const form = document.getElementById("blogForm");
+const editForm = document.getElementById("editBlogForm");
+
+console.log("editForm =", editForm);
 
 const title = document.getElementById("title");
 const author = document.getElementById("author");
@@ -20,6 +23,8 @@ const imageError = document.getElementById("imageError");
 
 const successMessage = document.getElementById("successMessage");
 
+//to cahnge id which blog we are updating
+let editingBlogId = null;
 // ============================
 // Form Validation
 // ============================
@@ -83,6 +88,40 @@ form.addEventListener("submit", async function (event) {
     }
 
 
+//Handle the Edit Form Submission
+if (editForm) {
+
+        console.log("Edit form listener attached.");
+
+
+    editForm.addEventListener("submit", async function (event) {
+                console.log("Submit event fired!");
+
+        event.preventDefault();
+        console.log("Update button clicked!");
+
+        const blogId = localStorage.getItem("editBlogId");
+
+        const response = await fetch(`/blogs/${blogId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                title: document.getElementById("title").value,
+                author: document.getElementById("author").value,
+                content: document.getElementById("content").value
+            })
+        });
+
+        const data = await response.json();
+
+        alert(data.message);
+
+    });
+
+}
+
     // ============================
     // Send Data to Express Server
     // ============================
@@ -138,27 +177,72 @@ content.addEventListener("input", function () {
 
 //show blogs
 async function loadBlogs() {
-     const response = await fetch("/blogs");
-     const blogs = await response.json();
-    const container = document.getElementById("blogContainer");//documnet represent entire html page
+
+    const response = await fetch("/blogs");
+    const blogs = await response.json();
+
+    const container = document.getElementById("blogContainer");
 
     container.innerHTML = "";
+
     blogs.forEach(blog => {
-container.innerHTML += `
-    <div class="blog-card">
 
-        <div class="card-content">
+        container.innerHTML += `
+            <div class="blog-card">
 
-            <h3>${blog.title}</h3>
+                <div class="card-content">
 
-            <p>${blog.content.substring(0, 100)}...</p>
-            <p><strong>Author:</strong> ${blog.author}</p>
+                    <h3>${blog.title}</h3>
 
-        </div>
+                    <p>${blog.content.substring(0, 100)}...</p>
 
-    </div>
-`;
-});
+                    <p><strong>Author:</strong> ${blog.author}</p>
+
+                    <button onclick="goToEdit(${blog.id})">
+    Edit
+</button>
+
+                </div>
+
+            </div>
+        `;
+
+    });
 
 }
-loadBlogs();
+
+if (document.getElementById("blogContainer")) {
+    loadBlogs();
+}
+
+
+
+function goToEdit(id) {
+
+    localStorage.setItem("editBlogId", id);
+
+    window.location.href = "edit-blog.html";
+
+}
+async function loadBlogForEdit() {
+
+    const blogId = localStorage.getItem("editBlogId");
+
+    if (!blogId) return;
+
+    const response = await fetch("/blogs");
+    const blogs = await response.json();
+
+    const blog = blogs.find(b => b.id == blogId);
+
+    if (!blog) return;
+
+    document.getElementById("title").value = blog.title;
+    document.getElementById("author").value = blog.author;
+    document.getElementById("content").value = blog.content;
+
+}
+
+if (window.location.pathname.includes("edit-blog.html")) {
+    loadBlogForEdit();
+}

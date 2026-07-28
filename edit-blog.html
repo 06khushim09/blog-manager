@@ -3,115 +3,136 @@
 
 <head>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Edit Blog - Blog Manager</title>
+
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
-
 <body>
-        <!--navbar-->
+
+    <!-- =========================
+            Navbar
+    ========================== -->
+
     <header>
-      <nav>
-        <h2>Blog Manager</h2>
 
-        <ul>
-          <li>
-            <a href="index.html"> Home </a>
-          </li>
+        <nav>
 
-          <li>
-            <a href="add-blog.html"> Add Blog </a>
-          </li>
+            <h2>Blog Manager</h2>
 
-          <li>
-            <a href="index.html#blogs"> View Blogs </a>
-          </li>
+            <ul class="nav-links">
 
-          <li>
-            <a href="login.html"> Login </a>
-          </li>
-        </ul>
-      </nav>
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="add-blog.html">Add Blog</a></li>
+
+                <li><a href="index.html#blogs">View Blogs</a></li>
+
+                <li><a href="login.html">Login</a></li>
+
+            </ul>
+
+        </nav>
+
     </header>
-    <!--navbar ended-->
-    <!--main started-->
+
+    <!-- =========================
+            Main
+    ========================== -->
+
     <main>
 
+        <section class="page-header">
 
-<section>
+            <h1>Edit Blog</h1>
 
+            <p>Update your blog details.</p>
 
-<h1>
-Edit Blog
-</h1>
+        </section>
 
+        <section class="form-container">
 
+            <form id="editBlogForm">
 
-<form>
+                <p id="successMessage" class="success"></p>
 
+                <!-- Blog Title -->
 
-<label>
-Blog Title
-</label>
+                <label for="title">Blog Title</label>
 
-<br>
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Enter your Blog Title"
+                >
 
-<input type="text" id="title" name="title">
+                <p id="titleError" class="error"></p>
 
+                <!-- Author -->
 
-<br><br>
+                <label for="author">Author Name</label>
 
+                <input
+                    type="text"
+                    id="author"
+                    placeholder="Enter author name"
+                >
 
+                <p id="authorError" class="error"></p>
 
-<label>
-Blog Content
-</label>
+                <!-- Blog Content -->
 
-<br>
+                <label for="content">Blog Content</label>
 
+                <p id="charCount">Characters: 0 / 500</p>
 
-<textarea id="content" name="content"></textarea>
+                <textarea
+                    id="content"
+                    placeholder="Update your article here..."
+                ></textarea>
 
+                <p id="contentError" class="error"></p>
 
-<br><br>
+                <!-- Cover Image -->
 
+                <label for="image">Cover Image</label>
 
+                <input
+                    type="file"
+                    id="image"
+                    accept="image/*"
+                >
 
-<label>
-Author Name
-</label>
+                <p id="imageError" class="error"></p>
 
-<br>
+                <button type="submit" id="updateBtn">
 
+                    Update Blog
 
-<input type="text" id="author" name="author">
+                </button>
 
+            </form>
 
-<br><br>
+        </section>
 
+    </main>
 
+    <!-- =========================
+            Footer
+    ========================== -->
 
-<button type="submit">
-Update Blog
-</button>
-
-
-
-</form>
-
-
-</section>
-
-
-</main>
-    <!--main ended-->
-    <!--footer started-->
     <footer>
-      <p>© 2026 Blog Manager</p>
+
+        <p>© 2026 Blog Manager</p>
+
     </footer>
-    <!--footer ended-->
+
+    <script src="js/script.js"></script>
 
 </body>
-
 
 </html>
