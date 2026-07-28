@@ -121,21 +121,57 @@ nav h2 {
 
     text-align:center;
     margin-bottom:40px;
+        position:relative;
+
+}
+.blogs h2::after{
+
+    content:"";
+    display:block;
+    width:80px;
+    height:3px;
+    background:#93b7e5;
+    margin:10px auto;
+
 }
 
 .blog-container{
 
     display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
     gap:30px;
+
 }
 
 .blog-card{
 
+    width:350px;
     background:white;
     border-radius:12px;
-    box-shadow:0 2px 12px rgba(0,0,0,.1);
-    overflow:hidden;
-    flex:1;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+}
+.blog-card button{
+
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 6px;
+    background-color: #93b7e5;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+.blog-card button:hover {
+
+    background-color: #7aa5dc;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+
 }
 
 .blog-card img{
@@ -159,6 +195,8 @@ nav h2 {
 
     color:#555;
     line-height:1.6;
+    font-size:16px;
+    
 }
 
 .card-content a{
@@ -294,4 +332,23 @@ button:hover{
     margin-bottom: 20px;
     text-align: center;
     font-weight: bold;
+}
+
+.no-blogs {
+
+    text-align: center;
+    padding: 40px;
+
+    font-size: 22px;
+    font-weight: 600;
+
+    color: #777;
+
+}
+.blog-date {
+
+    font-size: 14px;
+    color: #777;
+    margin: 10px 0;
+
 }

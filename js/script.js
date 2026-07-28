@@ -1,13 +1,9 @@
-console.log("JavaScript Connected!");
-
 // ============================
 // DOM Elements
 // ============================
 
 const form = document.getElementById("blogForm");
 const editForm = document.getElementById("editBlogForm");
-
-console.log("editForm =", editForm);
 
 const title = document.getElementById("title");
 const author = document.getElementById("author");
@@ -23,159 +19,158 @@ const imageError = document.getElementById("imageError");
 
 const successMessage = document.getElementById("successMessage");
 
-//to cahnge id which blog we are updating
-let editingBlogId = null;
 // ============================
-// Form Validation
+// Add Blog Form
 // ============================
-if(form)
-{
-form.addEventListener("submit", async function (event) {
 
-    event.preventDefault();
+if (form) {
 
-    let isValid = true;
-
-    // Clear previous messages
-    successMessage.textContent = "";
-    successMessage.style.display = "none";
-
-    titleError.textContent = "";
-    authorError.textContent = "";
-    contentError.textContent = "";
-    imageError.textContent = "";
-
-    // ============================
-    // Blog Title Validation
-    // ============================
-
-    if (title.value.trim() === "") {
-        titleError.textContent = "Please enter blog title.";
-        isValid = false;
-    }
-
-    // ============================
-    // Author Validation
-    // ============================
-
-    if (author.value.trim() === "") {
-        authorError.textContent = "Please enter author name.";
-        isValid = false;
-    }
-
-    // ============================
-    // Content Validation
-    // ============================
-
-    if (content.value.trim() === "") {
-        contentError.textContent = "Content cannot be empty.";
-        isValid = false;
-    }
-
-    // ============================
-    // Image Validation
-    // ============================
-
-    if (image.files.length === 0) {
-        imageError.textContent = "Please upload a cover image.";
-        isValid = false;
-    }
-
-    // Stop if validation fails
-
-    if (!isValid) {
-        return;
-    }
-
-
-//Handle the Edit Form Submission
-if (editForm) {
-
-        console.log("Edit form listener attached.");
-
-
-    editForm.addEventListener("submit", async function (event) {
-                console.log("Submit event fired!");
+    form.addEventListener("submit", async function (event) {
 
         event.preventDefault();
-        console.log("Update button clicked!");
 
-        const blogId = localStorage.getItem("editBlogId");
+        let isValid = true;
 
-        const response = await fetch(`/blogs/${blogId}`, {
-            method: "PUT",
+        // Clear previous messages
+        successMessage.textContent = "";
+        successMessage.style.display = "none";
+
+        titleError.textContent = "";
+        authorError.textContent = "";
+        contentError.textContent = "";
+        imageError.textContent = "";
+
+        // Title Validation
+        if (title.value.trim() === "") {
+            titleError.textContent = "Please enter blog title.";
+            isValid = false;
+        }
+
+        // Author Validation
+        if (author.value.trim() === "") {
+            authorError.textContent = "Please enter author name.";
+            isValid = false;
+        }
+
+        // Content Validation
+        if (content.value.trim() === "") {
+            contentError.textContent = "Content cannot be empty.";
+            isValid = false;
+        }
+
+        // Image Validation
+        if (image && image.files.length === 0) {
+            imageError.textContent = "Please upload a cover image.";
+            isValid = false;
+        }
+
+        if (!isValid) {
+            return;
+        }
+
+        const response = await fetch("/blogs", {
+
+            method: "POST",
+
             headers: {
                 "Content-Type": "application/json"
             },
+
             body: JSON.stringify({
-                title: document.getElementById("title").value,
-                author: document.getElementById("author").value,
-                content: document.getElementById("content").value
+                title: title.value,
+                author: author.value,
+                content: content.value
             })
+
         });
 
         const data = await response.json();
 
-        alert(data.message);
+        successMessage.textContent = data.message;
+        successMessage.style.display = "block";
+
+        form.reset();
+
+        if (charCount) {
+            charCount.textContent = "Characters: 0 / 500";
+        }
 
     });
 
 }
 
-    // ============================
-    // Send Data to Express Server
-    // ============================
+// ============================
+// Edit Blog Form
+// ============================
 
-    const response = await fetch("/blogs", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            title: title.value,
-            author: author.value,
-            content: content.value
-        })
+if (editForm) {
+
+    editForm.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        const blogId = localStorage.getItem("editBlogId");
+
+        const response = await fetch(`/blogs/${blogId}`, {
+
+            method: "PUT",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                title: title.value,
+                author: author.value,
+                content: content.value
+
+            })
+
+        });
+
+        const data = await response.json();
+
+// Show success message
+successMessage.textContent = data.message;
+successMessage.style.display = "block";
+
+// Clear stored blog id
+localStorage.removeItem("editBlogId");
+
+// Redirect after 2 seconds
+setTimeout(() => {
+    window.location.href = "index.html";
+}, 2000);
+
     });
 
-    const data = await response.json();
-
-    // ============================
-    // Show Success Message
-    // ============================
-
-    successMessage.textContent = data.message;
-    successMessage.style.display = "block";
-
-    console.log("Server Response:", data);
-
-    // Optional: Clear form after successful submission
-    form.reset();
-
-    // Reset character counter
-    charCount.textContent = "Characters: 0 / 500";
-
-});
 }
 
-if(content)
-{
 // ============================
 // Character Counter
 // ============================
 
-content.addEventListener("input", function () {
+if (content) {
 
-    if (content.value.length > 500) {
-        content.value = content.value.slice(0, 500);
-    }
+    content.addEventListener("input", function () {
 
-    charCount.textContent = `Characters: ${content.value.length} / 500`;
+        if (content.value.length > 500) {
+            content.value = content.value.slice(0, 500);
+        }
 
-});
+        if (charCount) {
+            charCount.textContent = `Characters: ${content.value.length} / 500`;
+        }
+
+    });
+
 }
 
-//show blogs
+// ============================
+// Load Blogs
+// ============================
+
 async function loadBlogs() {
 
     const response = await fetch("/blogs");
@@ -183,7 +178,19 @@ async function loadBlogs() {
 
     const container = document.getElementById("blogContainer");
 
+    if (!container) return;
+
     container.innerHTML = "";
+    if (blogs.length === 0) {
+
+    container.innerHTML = `
+        <p class="no-blogs">
+            📝 No blogs available. Add your first blog!
+        </p>
+    `;
+
+    return;
+}
 
     blogs.forEach(blog => {
 
@@ -194,13 +201,25 @@ async function loadBlogs() {
 
                     <h3>${blog.title}</h3>
 
-                    <p>${blog.content.substring(0, 100)}...</p>
-
+<p>
+    ${blog.content.length > 100
+        ? blog.content.substring(0, 100) + "..."
+        : blog.content}
+</p>
                     <p><strong>Author:</strong> ${blog.author}</p>
+                    <p class="blog-date">
+    Published: ${new Date(blog.createdAt).toLocaleDateString("en-GB", {
+
+    day:"numeric",
+    month:"short",
+    year:"numeric"
+
+})}
+</p>
 
                     <button onclick="goToEdit(${blog.id})">
-    Edit
-</button>
+                         Edit Blog
+                    </button>
 
                 </div>
 
@@ -215,7 +234,9 @@ if (document.getElementById("blogContainer")) {
     loadBlogs();
 }
 
-
+// ============================
+// Go To Edit Page
+// ============================
 
 function goToEdit(id) {
 
@@ -224,6 +245,11 @@ function goToEdit(id) {
     window.location.href = "edit-blog.html";
 
 }
+
+// ============================
+// Load Blog For Editing
+// ============================
+
 async function loadBlogForEdit() {
 
     const blogId = localStorage.getItem("editBlogId");
@@ -237,9 +263,13 @@ async function loadBlogForEdit() {
 
     if (!blog) return;
 
-    document.getElementById("title").value = blog.title;
-    document.getElementById("author").value = blog.author;
-    document.getElementById("content").value = blog.content;
+    title.value = blog.title;
+    author.value = blog.author;
+    content.value = blog.content;
+
+    if (charCount) {
+        charCount.textContent = `Characters: ${content.value.length} / 500`;
+    }
 
 }
 
