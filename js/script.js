@@ -194,9 +194,8 @@ async function loadBlogs() {
 
     blogs.forEach(blog => {
 
-        container.innerHTML += `
-            <div class="blog-card">
-
+container.innerHTML += `
+    <div class="blog-card" id="blog-${blog.id}">
                 <div class="card-content">
 
                     <h3>${blog.title}</h3>
@@ -217,10 +216,17 @@ async function loadBlogs() {
 })}
 </p>
 
-                    <button onclick="goToEdit(${blog.id})">
-                         Edit Blog
-                    </button>
+<div class="blog-actions">
 
+    <button class="edit-btn" onclick="goToEdit(${blog.id})">
+        Edit
+    </button>
+
+<button class="delete-btn" onclick="deleteBlog(${blog.id}, '${blog.title.replace(/'/g, "\\'")}')">
+        Delete
+    </button>
+
+</div>
                 </div>
 
             </div>
@@ -243,6 +249,65 @@ function goToEdit(id) {
     localStorage.setItem("editBlogId", id);
 
     window.location.href = "edit-blog.html";
+
+}
+
+// ============================
+// Delete Blog
+// ============================
+
+async function deleteBlog(id,title) {
+
+    const result = await Swal.fire({
+    title: "Delete Blog?",
+html: `Are you sure you want to delete <strong>"${title}"</strong>?`,    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#e74c3c",
+    cancelButtonColor: "#6c757d",
+    confirmButtonText: "Yes, Delete",
+    cancelButtonText: "Cancel"
+});
+
+if (!result.isConfirmed) {
+    return;
+}
+
+    const response = await fetch(`/blogs/${id}`, {
+        method: "DELETE"
+    });
+
+    const data = await response.json();
+
+    // Show success message
+    const deleteSuccess = document.getElementById("deleteSuccess");
+
+    if (deleteSuccess) {
+
+        deleteSuccess.textContent = data.message;
+        deleteSuccess.style.display = "block";
+
+        setTimeout(() => {
+            deleteSuccess.style.display = "none";
+        }, 2000);
+
+    }
+
+    const card = document.getElementById(`blog-${id}`);
+
+if (card) {
+
+    card.style.opacity = "0";
+    card.style.transform = "scale(0.9)";
+
+    setTimeout(() => {
+        loadBlogs();
+    }, 300);
+
+} else {
+
+    loadBlogs();
+
+}
 
 }
 

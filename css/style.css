@@ -147,32 +147,29 @@ nav h2 {
 .blog-card{
 
     width:350px;
+
     background:white;
     border-radius:12px;
-    padding:20px;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    overflow:hidden;
 
-}
-.blog-card button{
+    display:flex;
+    flex-direction:column;
 
-    display: block;
-    margin: 20px auto 0;
-    padding: 10px 22px;
-    border: none;
-    border-radius: 6px;
-    background-color: #93b7e5;
-    color: white;
-    cursor: pointer;
+    min-height:420px;
+
     transition: all 0.3s ease;
+}
+
+.blog-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
 
 }
-.blog-card button:hover {
 
-    background-color: #7aa5dc;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 
-}
 
 .blog-card img{
 
@@ -183,10 +180,18 @@ nav h2 {
 
 .card-content{
 
-    padding:20px;
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+
+    padding: 20px;
+
 }
 
 .card-content h3{
+
+    min-height:60px;
 
     margin-bottom:15px;
 }
@@ -298,7 +303,7 @@ input[type="file"]{
     margin-top:10px;
 }
 
-button{
+.form-container button{
     width:100%;
     margin-top:30px;
     padding:15px;
@@ -311,7 +316,7 @@ button{
     transition:.3s;
 }
 
-button:hover{
+.form-container button:hover{
     background:#1d4ed8;
 }
 
@@ -350,5 +355,67 @@ button:hover{
     font-size: 14px;
     color: #777;
     margin: 10px 0;
+
+}
+
+.blog-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:auto;
+
+    padding-top:20px;
+
+}
+
+.blog-actions button{
+
+    flex:1;
+
+    margin:0;
+
+    width:auto;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:8px;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.edit-btn{
+
+    background:#4f8df7;
+
+}
+
+.edit-btn:hover{
+
+    background:#2d6cdf;
+
+}
+
+.delete-btn{
+
+    background:#e74c3c;
+
+}
+
+.delete-btn:hover{
+
+    background:#c0392b;
 
 }

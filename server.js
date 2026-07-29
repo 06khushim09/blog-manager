@@ -11,6 +11,7 @@ const PORT = 3000;
 
 // Temporary storage (will reset when server restarts)
 let blogs = [];
+let nextId = 1;
 
 // Home Route
 app.get("/", (req, res) => {
@@ -32,12 +33,12 @@ app.post("/blogs", (req, res) => {
     }
 
     const newBlog = {
-        id: blogs.length + 1,
-        title: req.body.title,
-        author: req.body.author,
-        content: req.body.content,
-        createdAt: new Date()
-    };
+    id: nextId++,
+    title: req.body.title,
+    author: req.body.author,
+    content: req.body.content,
+    createdAt: new Date()
+};
 
     blogs.push(newBlog);
 
@@ -80,6 +81,33 @@ app.put("/blogs/:id", (req, res) => {
     res.json({
         message: "Blog updated successfully!",
         blog: blog
+    });
+
+});
+
+// DELETE - Remove Blog
+app.delete("/blogs/:id", (req, res) => {
+
+    const id = Number(req.params.id);
+
+    const index = blogs.findIndex(blog => blog.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({
+            message: "Blog not found."
+        });
+    }
+
+    const deletedBlog = blogs.splice(index, 1);
+
+    console.log("\n========== BLOG DELETED ==========");
+    console.log(deletedBlog[0]);
+
+    console.log("\n========== ALL BLOGS ==========");
+    console.table(blogs);
+
+    res.json({
+        message: "Blog deleted successfully!"
     });
 
 });
