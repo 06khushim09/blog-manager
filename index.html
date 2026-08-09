@@ -1,84 +1,149 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="css/style.css">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Blog Manager</title>
-  </head>
-  <body>
-    <!--navbar-->
-    <header>
-      <nav>
-        <h2>Blog Manager</h2>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ==========================
+         NAVBAR
+    =========================== -->
+<header class="site-header">
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            Blog Manager
+        </a>
 
         <ul class="nav-links">
-          <li>
-            <a href="index.html"> Home </a>
-          </li>
 
-          <li>
-            <a href="add-blog.html"> Add Blog </a>
-          </li>
+            <li>
+                <a href="index.html" class="active">Home</a>
+            </li>
 
-          <li>
-            <a href="index.html#blogs"> View Blogs </a>
-          </li>
+            <li>
+                <a href="add-blog.html">Add Blog</a>
+            </li>
 
-          <li>
-            <a href="login.html"> Login </a>
-          </li>
+            <li>
+                <a href="index.html#blogs">View Blogs</a>
+            </li>
+
+            <li>
+                <a href="login.html">Login</a>
+            </li>
+
         </ul>
-      </nav>
-    </header>
-    <!--navbar ended-->
 
-    <!--main section started-->
-<main>
+    </nav>
 
-    <section class="hero">
+</header>
+<!-- ==========================
+     HERO SECTION
+=========================== -->
 
-        <div class="hero-text">
+<section class="hero">
 
-            <h1>Welcome to Blog Manager</h1>
+    <div class="hero-text">
 
-            <p>
-                Create, manage and share your ideas with a clean and
-                easy-to-use blogging platform.
-            </p>
+        <h1>
+            Welcome to
+            <span>Blog Manager</span>
+        </h1>
 
-            <a href="add-blog.html" class="hero-btn">
-                Create New Blog
-            </a>
+        <p>
+            Create, manage and share your ideas with a simple,
+            clean and easy-to-use blogging platform.
+        </p>
 
-        </div>
+        <a href="add-blog.html" class="hero-btn">
+            Create New Blog
+        </a>
 
-        <div class="hero-image">
+    </div>
 
-            <img src="images/blog_writing_img.jpg" alt="Blog Illustration">
+    <div class="hero-image">
 
-        </div>
-
-    </section>
-
-</main>
-    <!--main secion ended-->
-    <!--add blog scection startrd-->
-<section class="blogs" id="blogs">
-
-    <h2>Latest Blogs</h2>
-    <p id="deleteSuccess" class="success"></p>
-    <div class="blog-container" id="blogContainer">
+        <img
+            src="images/blog_writing_img.jpg"
+            alt="Blog Writing Illustration"
+        >
 
     </div>
 
 </section>
-<!--add blog section is ended-->
-    <!--footer started-->
-    <footer>
-      <p>© 2026 Blog Manager</p>
-    </footer>
-    <!--footer ended-->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- ==========================
+             BLOGS SECTION
+        =========================== -->
+
+        <section class="blogs" id="blogs">
+
+            <div class="section-heading">
+
+                <span>
+                    OUR BLOGS
+                </span>
+
+                <h2>
+                    Latest Blogs
+                </h2>
+
+                <p>
+                    Explore the latest ideas and stories shared
+                    through Blog Manager.
+                </p>
+
+            </div>
+
+
+            <p
+                id="deleteSuccess"
+                class="success">
+            </p>
+
+
+            <div
+                class="blog-container"
+                id="blogContainer">
+            </div>
+
+        </section>
+
+    </main>
+<footer>
+    <h2>Blog Manager</h2>
+
+    <p>
+        A simple platform to create, manage and share your ideas.
+    </p>
+
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="add-blog.html">Add Blog</a>
+        <a href="index.html#blogs">View Blogs</a>
+        <a href="login.html">Login</a>
+    </div>
+
+    <p class="copyright">
+        © 2026 Blog Manager. All rights reserved.
+    </p>
+</footer>
+
+    <!-- ==========================
+         JAVASCRIPT
+    =========================== -->
 
     <script src="js/script.js"></script>
-  </body>
+
+</body>
+
 </html>

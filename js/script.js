@@ -68,37 +68,72 @@ if (form) {
             return;
         }
 
-        const response = await fetch("/blogs", {
 
-            method: "POST",
+        // ============================
+        // Create FormData
+        // ============================
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+        const formData = new FormData();
 
-            body: JSON.stringify({
-                title: title.value,
-                author: author.value,
-                content: content.value
-            })
+        formData.append("title", title.value);
+        formData.append("author", author.value);
+        formData.append("content", content.value);
+        formData.append("image", image.files[0]);
 
-        });
 
-        const data = await response.json();
+        // ============================
+        // Send Blog + Image
+        // ============================
 
-        successMessage.textContent = data.message;
-        successMessage.style.display = "block";
+        try {
 
-        form.reset();
+            const response = await fetch("/blogs", {
 
-        if (charCount) {
-            charCount.textContent = "Characters: 0 / 500";
+                method: "POST",
+
+                body: formData
+
+            });
+
+
+            const data = await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(data.message || "Failed to create blog.");
+
+            }
+
+
+            // Success message
+            successMessage.textContent = data.message;
+            successMessage.style.display = "block";
+
+
+            // Reset form
+            form.reset();
+
+
+            if (charCount) {
+                charCount.textContent = "Characters: 0 / 500";
+            }
+
+
+        } catch (error) {
+
+            console.error("Error:", error);
+
+            successMessage.textContent =
+                "Something went wrong. Please try again.";
+
+            successMessage.style.display = "block";
+
         }
 
     });
 
 }
-
 // ============================
 // Edit Blog Form
 // ============================
@@ -181,65 +216,131 @@ async function loadBlogs() {
     if (!container) return;
 
     container.innerHTML = "";
+
     if (blogs.length === 0) {
 
-    container.innerHTML = `
-        <p class="no-blogs">
-            📝 No blogs available. Add your first blog!
-        </p>
-    `;
+        container.innerHTML = `
+            <p class="no-blogs">
+                No blogs available. Add your first blog!
+            </p>
+        `;
 
-    return;
-}
+        return;
+    }
+blogs.forEach(blog => {
 
-    blogs.forEach(blog => {
+    const maxLength = 150;
+    const isLongContent = blog.content.length > maxLength;
 
-container.innerHTML += `
-    <div class="blog-card" id="blog-${blog.id}">
-                <div class="card-content">
+    const shortContent = isLongContent
+        ? blog.content.substring(0, maxLength) + "..."
+        : blog.content;
 
-                    <h3>${blog.title}</h3>
+    const fullContent = encodeURIComponent(blog.content);
 
-<p>
-    ${blog.content.length > 100
-        ? blog.content.substring(0, 100) + "..."
-        : blog.content}
-</p>
-                    <p><strong>Author:</strong> ${blog.author}</p>
-                    <p class="blog-date">
-    Published: ${new Date(blog.createdAt).toLocaleDateString("en-GB", {
+    container.innerHTML += `
+        <div class="blog-card">
 
-    day:"numeric",
-    month:"short",
-    year:"numeric"
+            ${
+                blog.image
+                ? `<img src="${blog.image}" alt="${blog.title}">`
+                : ""
+            }
 
-})}
-</p>
+            <div class="card-content">
 
-<div class="blog-actions">
+                <h3>${blog.title}</h3>
 
-    <button class="edit-btn" onclick="goToEdit(${blog.id})">
-        Edit
-    </button>
+                <p class="blog-description">
+                    <span id="content-${blog.id}">
+                        ${shortContent}
+                    </span>
+                </p>
 
-<button class="delete-btn" onclick="deleteBlog(${blog.id}, '${blog.title.replace(/'/g, "\\'")}')">
-        Delete
-    </button>
+                ${
+                    isLongContent
+                    ? `
+                        <button
+                            type="button"
+                            class="read-more-btn"
+                            data-content="${fullContent}"
+                            onclick="toggleContent(${blog.id}, this)">
+                            Read More
+                        </button>
+                    `
+                    : ""
+                }
 
-</div>
+                <p class="blog-author">
+                    <strong>By:</strong> ${blog.author}
+                </p>
+
+                <p class="blog-date">
+                    ${new Date(blog.createdAt).toLocaleDateString("en-US", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric"
+                    })}
+                </p>
+
+                <div class="blog-actions">
+
+                    <button
+                        class="edit-btn"
+                        onclick="goToEdit(${blog.id})">
+                        Edit
+                    </button>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteBlog(${blog.id}, '${blog.title.replace(/'/g, "\\'")}')">
+                        Delete
+                    </button>
+
                 </div>
 
             </div>
-        `;
 
-    });
+        </div>
+    `;
+});
+};
 
+// ============================
+// Read More / Show Less
+// ============================
+
+function toggleContent(id, button) {
+
+    const content = document.getElementById(`content-${id}`);
+
+    const fullContent = decodeURIComponent(
+        button.getAttribute("data-content")
+    );
+
+    const maxLength = 150;
+
+    if (button.textContent.trim() === "Read More") {
+
+        content.textContent = fullContent;
+        button.textContent = "Show Less";
+
+    } else {
+
+        content.textContent =
+            fullContent.substring(0, maxLength) + "...";
+
+        button.textContent = "Read More";
+    }
 }
+
+// ============================
+// Load Blogs on Page
+// ============================
 
 if (document.getElementById("blogContainer")) {
     loadBlogs();
 }
-
 // ============================
 // Go To Edit Page
 // ============================
@@ -308,7 +409,6 @@ if (card) {
     loadBlogs();
 
 }
-
 }
 
 // ============================

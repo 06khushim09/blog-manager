@@ -1,421 +1,2230 @@
-:root{--primary-color:#93b7e5;}
-body
-{
+/* =========================================================
+   BLOG MANAGER - COMPLETE STYLESHEET
+   ========================================================= */
 
-    background-color:#eaf5f5;
-    color:black;
+
+/* =========================================================
+   1. GLOBAL
+   ========================================================= */
+
+:root {
+    --primary-color: #5b8fda;
+    --primary-dark: #3f73bd;
+    --light-blue: #eaf5f5;
+    --dark: #162033;
+    --text: #344054;
+    --white: #ffffff;
+    --border: #d9e2ec;
+    --danger: #e74c3c;
+    --success: #2e9d63;
+
+    --container-width: 1180px;
 }
 
-/* ==========================
-   Navbar
-========================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-nav {
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 60px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--light-blue);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   2. NAVBAR
+   ========================================================= */
+
+header {
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
+nav {
+    width: 100%;
+    min-height: 76px;
+
+    background-color: rgba(255, 255, 255, 0.97);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    box-shadow: 0 3px 15px rgba(22, 32, 51, 0.08);
+
+    backdrop-filter: blur(8px);
+}
+
+
 /* Logo */
 
 nav h2 {
     margin: 0;
+
     color: var(--primary-color);
-    font-family: sans-serif;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
 }
 
-/* Navigation Links */
+
+/* Navigation list */
 
 .nav-links {
     display: flex;
+    align-items: center;
+
     list-style: none;
-    gap: 30px;
+
+    gap: 8px;
+
+    margin: 0;
     padding: 0;
+}
+
+
+/* Navigation links */
+
+.nav-links a {
+    display: block;
+
+    padding: 10px 15px;
+
+    color: #172033;
+
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    border-radius: 8px;
+
+    transition: all 0.25s ease;
+}
+
+
+/* Hover */
+
+.nav-links a:hover {
+    color: var(--primary-color);
+    background-color: #edf4fd;
+}
+
+
+/* Active */
+
+.nav-links a.active {
+    color: var(--primary-color);
+    background-color: #edf4fd;
+}
+
+
+/* =========================================================
+   3. HERO SECTION
+   ========================================================= */
+
+.hero {
+    width: 100%;
+    max-width: var(--container-width);
+
+    min-height: 560px;
+
+    margin: 0 auto;
+
+    padding: 70px 35px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    align-items: center;
+
+    gap: 65px;
+}
+
+
+/* Hero text */
+
+.hero-text {
+    max-width: 570px;
+}
+
+
+/* Small label */
+
+.hero-text::before {
+    content: "SHARE YOUR IDEAS";
+
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    padding: 7px 15px;
+
+    border-radius: 30px;
+
+    background-color: #e1edfc;
+
+    color: var(--primary-color);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+}
+
+
+/* Main heading */
+
+.hero-text h1 {
+    margin-bottom: 22px;
+
+    color: var(--dark);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: clamp(42px, 5vw, 64px);
+
+    line-height: 1.05;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+}
+
+
+/* Make Blog Manager blue */
+
+.hero-text h1 {
+    max-width: 570px;
+}
+
+
+/* Paragraph */
+
+.hero-text p {
+    max-width: 560px;
+
+    margin-bottom: 30px;
+
+    color: #54708f;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+}
+
+
+/* Hero image */
+
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.hero-image img {
+    width: 100%;
+    max-width: 510px;
+    height: 340px;
+
+    object-fit: cover;
+
+    border-radius: 18px;
+
+    box-shadow: 0 18px 40px rgba(31, 55, 86, 0.16);
+}
+
+
+/* =========================================================
+   4. BUTTONS
+   ========================================================= */
+
+.hero-btn,
+#submitBtn,
+#updateBtn {
+    display: inline-block;
+
+    padding: 13px 23px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--primary-color);
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    box-shadow: 0 7px 18px rgba(91, 143, 218, 0.25);
+
+    transition: all 0.25s ease;
+}
+
+
+.hero-btn:hover,
+#submitBtn:hover,
+#updateBtn:hover {
+    background-color: var(--primary-dark);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 22px rgba(91, 143, 218, 0.3);
+}
+
+
+/* =========================================================
+   5. BLOG SECTION
+   ========================================================= */
+
+.blogs {
+    width: 100%;
+    max-width: var(--container-width);
+
+    margin: 0 auto;
+
+    padding: 70px 35px 100px;
+
+    text-align: center;
+}
+
+
+/* Section heading */
+
+.blogs h2 {
+    color: var(--dark);
+
+    font-size: 38px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 12px;
+}
+
+
+/* Blue line under heading */
+
+.blogs h2::after {
+    content: "";
+
+    display: block;
+
+    width: 52px;
+    height: 3px;
+
+    margin: 12px auto 15px;
+
+    background-color: var(--primary-color);
+
+    border-radius: 10px;
+}
+
+
+/* Success message */
+/* ==========================
+   Success Message
+========================== */
+
+.success {
+    display: none;
+    margin: 10px 0 18px;
+    padding: 10px 14px;
+    color: #198754;
+    background-color: #eaf8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.success.show {
+    display: block;
+}
+
+
+/* =========================================================
+   6. BLOG GRID
+   ========================================================= */
+
+.blog-container {
+    width: 100%;
+
+    margin-top: 45px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 28px;
+
+    text-align: left;
+}
+
+
+/* No blogs */
+
+.no-blogs {
+    grid-column: 1 / -1;
+
+    padding: 45px 20px;
+
+    background-color: white;
+
+    border-radius: 14px;
+
+    color: #64748b;
+
+    font-size: 16px;
+
+    box-shadow: 0 8px 25px rgba(31, 55, 86, 0.07);
+}
+
+
+/* =========================================================
+   7. BLOG CARD
+   ========================================================= */
+
+/* ==========================
+   BLOG GRID
+========================== */
+
+.blog-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 35px auto 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+
+    padding: 0 20px;
+}
+
+
+/* ==========================
+   BLOG CARD
+========================== */
+
+.blog-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+
+    box-shadow: 0 8px 25px rgba(20, 40, 70, 0.10);
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    transition: 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(20, 40, 70, 0.15);
+}
+
+
+/* Blog Image */
+
+.blog-card > img {
+    width: 100%;
+    height: 210px;
+
+    object-fit: cover;
+    display: block;
+}
+
+
+/* Card Content */
+
+.card-content {
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+}
+
+
+/* Blog Title */
+
+.card-content h3 {
+    margin: 0 0 12px;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    color: #16233b;
+
+    word-break: break-word;
+}
+
+
+/* Blog Content */
+
+.blog-description {
+    color: #53657d;
+    font-size: 15px;
+    line-height: 1.7;
+
+    margin: 8px 0 15px;
+
+    word-break: break-word;
+}
+
+
+/* Author */
+
+.card-content p strong {
+    color: #16233b;
+}
+
+.blog-author {
+    font-size: 14px;
+    color: #617189;
+    margin-bottom: 6px;
+}
+
+
+/* Date */
+
+.blog-date {
+    font-size: 13px;
+    color: #8290a3;
+    margin-top: 0;
+}
+
+
+/* ==========================
+   READ MORE
+========================== */
+
+.read-more-btn {
+    border: none;
+    background: none;
+
+    color: var(--primary-color);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    padding: 0;
+    margin: 0 0 18px;
+
+    text-align: left;
+
+    transition: 0.3s ease;
+}
+
+.read-more-btn:hover {
+    color: #5d8fd2;
+}
+
+
+/* ==========================
+   CARD BUTTONS
+========================== */
+
+.blog-actions {
+    display: flex;
+    gap: 12px;
+
+    margin-top: auto;
+}
+
+.edit-btn,
+.delete-btn {
+    flex: 1;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 11px 15px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.edit-btn {
+    background: #4d8bea;
+    color: white;
+}
+
+.edit-btn:hover {
+    background: #3678dc;
+    transform: translateY(-2px);
+}
+
+.delete-btn {
+    background: #ef4d43;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #d93c33;
+    transform: translateY(-2px);
+}/* =========================================================
+   8. BLOG ACTION BUTTONS
+   ========================================================= */
+
+.blog-actions {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: auto;
+
+    padding-top: 18px;
+}
+
+
+.edit-btn,
+.delete-btn {
+    border: none;
+
+    padding: 11px 12px;
+
+    border-radius: 7px;
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+.edit-btn {
+    background-color: #4f8bea;
+}
+
+
+.delete-btn {
+    background-color: var(--danger);
+}
+
+
+.edit-btn:hover {
+    background-color: #3978d5;
+
+    transform: translateY(-1px);
+}
+
+
+.delete-btn:hover {
+    background-color: #d93627;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   9. ADD / EDIT BLOG PAGE
+   ========================================================= */
+
+main {
+    min-height: calc(100vh - 76px);
+}
+
+
+/* Page heading */
+
+.page-header {
+    width: 100%;
+    max-width: 800px;
+
+    margin: 0 auto;
+
+    padding: 65px 25px 25px;
+
+    text-align: center;
+}
+
+
+.page-header h1 {
+    margin-bottom: 10px;
+
+    color: var(--dark);
+
+    font-size: 40px;
+
+    font-weight: 800;
+}
+
+
+.page-header p {
+    color: #60758d;
+
+    font-size: 16px;
+}
+
+
+/* Form box */
+
+.form-container {
+    width: calc(100% - 40px);
+
+    max-width: 800px;
+
+    margin: 20px auto 80px;
+
+    padding: 35px;
+
+    background-color: white;
+
+    border-radius: 16px;
+
+    box-shadow: 0 10px 35px rgba(31, 55, 86, 0.10);
+}
+
+
+/* Form */
+
+.form-container form {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* Labels */
+
+.form-container label {
+    margin-bottom: 7px;
+
+    color: var(--dark);
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* Inputs and textarea */
+
+.form-container input[type="text"],
+.form-container input[type="password"],
+.form-container textarea {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    margin-bottom: 5px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    background-color: #fbfdff;
+
+    color: #1e293b;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.form-container input:focus,
+.form-container textarea:focus {
+    border-color: var(--primary-color);
+
+    box-shadow: 0 0 0 3px rgba(91, 143, 218, 0.12);
+
+    background-color: white;
+}
+
+
+/* Textarea */
+
+.form-container textarea {
+    min-height: 230px;
+
+    resize: vertical;
+
+    line-height: 1.7;
+}
+
+
+/* File input */
+
+.form-container input[type="file"] {
+    width: 100%;
+
+    padding: 10px;
+
+    margin-bottom: 5px;
+
+    border: 1px dashed #b8c7d8;
+
+    border-radius: 8px;
+
+    background-color: #f8fbff;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+
+/* Character count */
+
+#charCount {
+    margin-bottom: 6px;
+
+    color: #8493a5;
+
+    font-size: 12px;
+
+    text-align: right;
+}
+
+
+/* Errors */
+
+.error {
+    min-height: 20px;
+
+    margin-bottom: 12px;
+
+    color: #e04a3a;
+
+    font-size: 12px;
+}
+
+
+/* Success */
+
+.form-container .success {
+    margin-bottom: 15px;
+
+    padding: 10px;
+
+    border-radius: 7px;
+
+    background-color: #eaf8f0;
+
+    text-align: center;
+}
+
+
+/* Form button */
+
+.form-container button {
+    margin-top: 10px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: var(--primary-color);
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+
+.form-container button:hover {
+    background-color: var(--primary-dark);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   10. LOGIN PAGE
+   ========================================================= */
+
+.login-page {
+    min-height: calc(100vh - 76px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 60px 20px;
+}
+
+
+.login-container {
+    width: 100%;
+
+    max-width: 430px;
+
+    padding: 38px;
+
+    background-color: white;
+
+    border-radius: 16px;
+
+    box-shadow: 0 12px 35px rgba(31, 55, 86, 0.12);
+}
+
+
+/* Login heading */
+
+.login-container h1 {
+    margin-bottom: 8px;
+
+    color: var(--dark);
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    text-align: center;
+}
+
+
+.login-container > p {
+    margin-bottom: 28px;
+
+    color: #718198;
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+
+/* Login labels */
+
+.login-container label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--dark);
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* Login inputs */
+
+.login-container input {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    margin-bottom: 18px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    background-color: #fbfdff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+
+.login-container input:focus {
+    border-color: var(--primary-color);
+
+    box-shadow: 0 0 0 3px rgba(91, 143, 218, 0.12);
+}
+
+
+/* Login button */
+
+.login-container button {
+    width: 100%;
+
+    padding: 13px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: var(--primary-color);
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.login-container button:hover {
+    background-color: var(--primary-dark);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   11. FOOTER
+   ========================================================= */
+
+footer {
+    background-color: #162033;
+
+    color: white;
+
+    padding: 45px 20px 25px;
+
+    text-align: center;
+}
+
+
+/* Footer title if added later */
+
+footer h2,
+footer h3 {
+    margin-bottom: 12px;
+
+    color: white;
+}
+
+
+/* Footer text */
+
+footer p {
+    margin: 6px 0;
+
+    color: #cbd5e1;
+
+    font-size: 14px;
+}
+
+
+/* Footer links */
+
+footer a {
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+
+footer a:hover {
+    color: white;
+}
+
+
+/* =========================================================
+   12. RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    nav {
+        padding: 0 4%;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+
+        padding: 60px 30px;
+
+        text-align: center;
+    }
+
+    .hero-text {
+        max-width: 700px;
+
+        margin: 0 auto;
+    }
+
+    .hero-text p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-image img {
+        max-width: 600px;
+    }
+
+    .blog-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================================
+   13. RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    nav {
+        min-height: auto;
+
+        padding: 15px 20px;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    nav h2 {
+        font-size: 21px;
+    }
+
+    .nav-links {
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        gap: 4px;
+    }
+
+    .nav-links a {
+        padding: 8px 10px;
+
+        font-size: 13px;
+    }
+
+
+    .hero {
+        min-height: auto;
+
+        padding: 55px 20px 65px;
+
+        gap: 35px;
+    }
+
+
+    .hero-text h1 {
+        font-size: 42px;
+
+        letter-spacing: -1.5px;
+    }
+
+
+    .hero-text p {
+        font-size: 15px;
+    }
+
+
+    .hero-image img {
+        height: 260px;
+    }
+
+
+    .blogs {
+        padding: 55px 20px 70px;
+    }
+
+
+    .blogs h2 {
+        font-size: 32px;
+    }
+
+
+    .blog-container {
+        grid-template-columns: 1fr;
+
+        gap: 22px;
+
+        margin-top: 30px;
+    }
+
+
+    .blog-card > img {
+        height: 210px;
+    }
+
+
+    .page-header {
+        padding-top: 45px;
+    }
+
+
+    .page-header h1 {
+        font-size: 32px;
+    }
+
+
+    .form-container {
+        width: calc(100% - 30px);
+
+        padding: 25px 20px;
+
+        margin-bottom: 50px;
+    }
+
+
+    .login-page {
+        padding: 40px 15px;
+    }
+
+
+    .login-container {
+        padding: 28px 22px;
+    }
+
+
+    footer {
+        padding: 35px 20px 22px;
+    }
+}
+
+/* =========================================
+   FINAL FOOTER + LINK FIX
+========================================= */
+
+footer {
+    background-color: #172033;
+    color: white;
+    text-align: center;
+    padding: 45px 20px 25px;
+    margin-top: 70px;
+}
+
+/* Footer headings */
+footer h2,
+footer h3 {
+    color: white;
+    margin-bottom: 15px;
+}
+
+/* Footer paragraphs */
+footer p {
+    color: #d5dce8;
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+/* Remove browser default purple links */
+footer a {
+    color: #8fb8ee;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+footer a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* =========================================
+   NAVBAR LOGO FIX
+========================================= */
+
+nav h2 {
+    color: var(--primary-color);
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
     margin: 0;
 }
 
-/* Links */
-
-.nav-links a {
+/* If Blog Manager is inside a link */
+nav h2 a,
+nav a.logo {
+    color: var(--primary-color);
     text-decoration: none;
-    color: black;
-    font-weight: 500;
-    transition:.3s;
-
 }
 
-/* Hover Effect */
+nav h2 a:hover,
+nav a.logo:hover {
+    color: #5f93df;
+}
+
+/* =========================================
+   GENERAL LINK FIX
+========================================= */
+
+a {
+    color: inherit;
+}
+
+.nav-links a {
+    color: #172033;
+    text-decoration: none;
+}
 
 .nav-links a:hover {
     color: var(--primary-color);
 }
 
+/* Active navbar link */
+.nav-links a.active {
+    color: var(--primary-color);
+}
+/* =========================================
+   FINAL FOOTER + LINK FIX
+========================================= */
 
-/* ===========================
-   Hero Section
-=========================== */
-
-.hero{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:80px 80px;
-    gap:60px;
+footer {
+    background-color: #172033;
+    color: white;
+    text-align: center;
+    padding: 45px 20px 25px;
+    margin-top: 70px;
 }
 
-.hero-text{
-    flex:1;
+/* Footer headings */
+footer h2,
+footer h3 {
+    color: white;
+    margin-bottom: 15px;
 }
 
-.hero-text h1{
-    font-size:52px;
-    margin-bottom:20px;
+/* Footer paragraphs */
+footer p {
+    color: #d5dce8;
+    margin: 8px 0;
+    line-height: 1.6;
 }
 
-.hero-text p{
-    font-size:20px;
-    color:#555;
-    line-height:1.8;
-    margin-bottom:30px;
+/* Remove browser default purple links */
+footer a {
+    color: #8fb8ee;
+    text-decoration: none;
+    transition: 0.3s ease;
 }
 
-.hero-btn{
-    display:inline-block;
-    text-decoration:none;
-    background-color:var(--primary-color);
-    color:white;
-    padding:15px 30px;
-    border-radius:8px;
-    transition:0.3s;
+footer a:hover {
+    color: white;
+    text-decoration: underline;
 }
 
-.hero-btn:hover{
-    filter:brightness(95%);
+/* =========================================
+   NAVBAR LOGO FIX
+========================================= */
+
+nav h2 {
+    color: var(--primary-color);
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
 }
 
-.hero-image{
-    flex:1;
-    text-align:center;
+/* If Blog Manager is inside a link */
+nav h2 a,
+nav a.logo {
+    color: var(--primary-color);
+    text-decoration: none;
 }
 
-.hero-image img{
-    width:100%;
-    max-width:500px;
-    border-radius:15px;
+nav h2 a:hover,
+nav a.logo:hover {
+    color: #5f93df;
 }
 
-/*add blod styling*/
+/* =========================================
+   GENERAL LINK FIX
+========================================= */
 
-.blogs{
-
-    padding:80px;
+a {
+    color: inherit;
 }
 
-.blogs h2{
-
-    text-align:center;
-    margin-bottom:40px;
-        position:relative;
-
-}
-.blogs h2::after{
-
-    content:"";
-    display:block;
-    width:80px;
-    height:3px;
-    background:#93b7e5;
-    margin:10px auto;
-
+.nav-links a {
+    color: #172033;
+    text-decoration: none;
 }
 
-.blog-container{
-
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:30px;
-
+.nav-links a:hover {
+    color: var(--primary-color);
 }
 
-.blog-card{
-
-    width:350px;
-
-    background:white;
-    border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-    overflow:hidden;
-
-    display:flex;
-    flex-direction:column;
-
-    min-height:420px;
-
-    transition: all 0.3s ease;
+/* Active navbar link */
+.nav-links a.active {
+    color: var(--primary-color);
+}
+/* Footer Buttons */
+footer a {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white !important;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-weight: 600;
+    margin: 5px;
+    transition: 0.3s ease;
 }
 
-.blog-card:hover{
+footer a:hover {
+    background-color: #6f9fdd;
+    color: white !important;
+    transform: translateY(-2px);
+}
+/* Footer */
+footer {
+    background-color: #172033;
+    color: white;
+    text-align: center;
+    padding: 45px 20px 25px;
+    margin-top: 70px;
+}
 
-    transform:translateY(-8px);
+footer h2 {
+    margin-bottom: 12px;
+    color: white;
+}
 
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
+footer p {
+    color: #d5dce8;
+    margin: 8px 0;
+}
 
+.footer-links {
+    margin: 20px 0;
+}
+
+.footer-links a {
+    color: #d5dce8;
+    text-decoration: none;
+    margin: 0 12px;
+    transition: 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Same style as Create New Blog */
+.footer-btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white !important;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    margin: 12px 0 20px;
+    transition: 0.3s ease;
+}
+
+.footer-btn:hover {
+    background-color: #6f9fdd;
+    transform: translateY(-2px);
+}
+
+.copyright {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 20px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+/* =========================================
+   NAVBAR LOGO IMPROVEMENT
+========================================= */
+
+nav h2 {
+    font-family: Arial, sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.hero {
+    width: 100%;
+    max-width: 1150px;
+    min-height: 520px;
+    margin: 0 auto;
+    padding: 70px 30px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+}
+
+.hero-text h1 {
+    margin: 0 0 22px;
+    font-family: Arial, sans-serif;
+    font-size: 56px;
+    line-height: 1.08;
+    font-weight: 800;
+    color: #172033;
+    letter-spacing: -1.5px;
+}
+
+.hero-text h1 span {
+    color: var(--primary-color);
+}
+
+.hero-text p {
+    max-width: 600px;
+    margin: 0 0 30px;
+
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #54708f;
+}
+
+.hero-btn {
+    display: inline-block;
+
+    background-color: var(--primary-color);
+    color: white;
+
+    text-decoration: none;
+    padding: 14px 25px;
+
+    border-radius: 7px;
+
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+
+    box-shadow: 0 8px 18px rgba(147, 183, 229, 0.35);
+
+    transition: 0.3s ease;
+}
+
+.hero-btn:hover {
+    background-color: #6f9fdd;
+    transform: translateY(-2px);
+}
+
+.hero-image {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 450px;
+    height: 330px;
+
+    object-fit: cover;
+
+    border-radius: 16px;
+
+    box-shadow: 0 15px 35px rgba(23, 32, 51, 0.15);
+}
+/* =========================================
+   ADD / EDIT BLOG PAGE
+========================================= */
+
+.page-header {
+    width: 100%;
+    max-width: 900px;
+    margin: 50px auto 25px;
+    padding: 0 25px;
+    text-align: center;
+}
+
+.page-header h1 {
+    margin: 0 0 10px;
+
+    font-family: Arial, sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+
+    color: #172033;
+}
+
+.page-header p {
+    margin: 0;
+
+    font-size: 16px;
+    color: #54708f;
 }
 
 
+/* Form width */
 
-.blog-card img{
+.form-container {
+    width: 100%;
+    max-width: 900px;
 
-    width:100%;
-    height:220px;
-    object-fit:cover;
+    margin: 0 auto 60px;
+
+    padding: 35px 45px;
+
+    background-color: white;
+
+    border-radius: 14px;
+
+    box-shadow: 0 10px 30px rgba(23, 32, 51, 0.10);
+
+    box-sizing: border-box;
 }
 
-.card-content{
+
+/* Form */
+
+.form-container form {
+    width: 100%;
+}
+
+
+/* Labels */
+
+.form-container label {
+    display: block;
+
+    margin: 18px 0 8px;
+
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+
+/* Inputs */
+
+.form-container input[type="text"],
+.form-container input[type="file"],
+.form-container textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px 15px;
+
+    border: 1px solid #d5dfeb;
+    border-radius: 7px;
+
+    background-color: #fbfdff;
+
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+
+    color: #172033;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+
+/* Textarea */
+
+.form-container textarea {
+    min-height: 230px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+
+/* Focus */
+
+.form-container input[type="text"]:focus,
+.form-container textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(147, 183, 229, 0.18);
+}
+
+
+/* File input */
+
+.form-container input[type="file"] {
+    background-color: white;
+    cursor: pointer;
+}
+
+
+/* Character counter */
+
+#charCount {
+    margin: 0 0 8px;
+
+    text-align: right;
+
+    font-size: 13px;
+    color: #718096;
+}
+
+
+/* Submit / Update button */
+
+#submitBtn,
+#updateBtn {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 7px;
+
+    background-color: var(--primary-color);
+    color: white;
+
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+#submitBtn:hover,
+#updateBtn:hover {
+    background-color: #6f9fdd;
+    transform: translateY(-1px);
+}
+
+
+/* Error messages */
+
+.error {
+    margin: 5px 0 0;
+
+    font-size: 13px;
+    color: #e05252;
+}
+
+
+/* Success message */
+
+.success {
+    margin: 10px 0;
+
+    font-size: 14px;
+    color: #3d8b65;
+}
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    background-color: #172033;
+    color: white;
+
+    text-align: center;
+
+    padding: 40px 20px 22px;
+
+    margin-top: 70px;
+}
+
+footer h2 {
+    margin: 0 0 12px;
+
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+
+    color: white;
+}
+
+footer p {
+    margin: 8px 0;
+
+    color: #d5dce8;
+    line-height: 1.6;
+}
+
+.footer-links {
+    margin: 22px 0;
+}
+
+.footer-links a {
+    color: #d5dce8;
+
+    text-decoration: none;
+
+    margin: 0 12px;
+
+    font-size: 14px;
+
+    transition: 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+footer .copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+    padding-top: 18px;
+    margin-top: 20px;
+
+    font-size: 13px;
+}
+/* =========================================
+   FINAL FOOTER - NO BUTTONS
+========================================= */
+
+footer {
+    background-color: #172033 !important;
+    color: white;
+    text-align: center;
+
+    padding: 40px 20px 22px;
+    margin-top: 70px;
+
+    border: none;
+}
+
+footer h2 {
+    margin: 0 0 10px;
+
+    color: white !important;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+footer p {
+    margin: 8px 0;
+    color: #d5dce8 !important;
+    font-size: 14px;
+}
+
+footer .footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 25px;
+
+    margin: 22px 0;
+}
+
+/* IMPORTANT: Footer links are NOT buttons */
+
+footer .footer-links a {
+    display: inline;
+    
+    padding: 0;
+    margin: 0;
+
+    background: none !important;
+    border: none !important;
+    border-radius: 0;
+
+    color: #d5dce8 !important;
+
+    text-decoration: none !important;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    box-shadow: none !important;
+
+    transform: none !important;
+
+    transition: color 0.25s ease;
+}
+
+footer .footer-links a:hover {
+    background: none !important;
+
+    color: #93b7e5 !important;
+
+    text-decoration: none !important;
+
+    transform: none !important;
+
+    box-shadow: none !important;
+}
+
+footer .copyright {
+    border-top: 1px solid rgba(255,255,255,0.12);
+
+    padding-top: 18px;
+    margin-top: 20px;
+
+    color: #aeb9c8 !important;
+    font-size: 13px;
+}
+/* ==========================
+   BLOG CARD IMPROVEMENTS
+========================== */
+
+.blog-container {
+    width: min(1100px, 92%);
+    margin: 40px auto 80px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 28px;
+
+    align-items: stretch;
+}
+
+
+/* Blog Card */
+
+.blog-card {
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: 0 8px 25px rgba(20, 40, 70, 0.10);
 
     display: flex;
     flex-direction: column;
 
+    min-width: 0;
+
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+
+/* Card Hover */
+
+.blog-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow: 0 15px 35px rgba(20, 40, 70, 0.16);
+}
+
+
+/* Blog Image */
+
+.blog-image {
+    width: 100%;
+    height: 210px;
+
+    overflow: hidden;
+}
+
+.blog-image img {
+    width: 100%;
     height: 100%;
 
-    padding: 20px;
+    object-fit: cover;
 
+    display: block;
+
+    transition: transform 0.4s ease;
 }
 
-.card-content h3{
-
-    min-height:60px;
-
-    margin-bottom:15px;
+.blog-card:hover .blog-image img {
+    transform: scale(1.04);
 }
 
-.card-content p{
 
-    color:#555;
-    line-height:1.6;
-    font-size:16px;
-    
+/* Card Content */
+
+.card-content {
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
 }
 
-.card-content a{
 
-    display:inline-block;
-    margin-top:15px;
-    color:var(--primary-color);
-    text-decoration:none;
-    font-weight:bold;
+/* Blog Title */
+
+.card-content h3 {
+    margin: 0 0 12px;
+
+    font-size: 21px;
+    line-height: 1.3;
+
+    color: #14213d;
+
+    word-break: break-word;
 }
 
-/*footer styling*/
-footer{
 
-    background:white;
-    text-align:center;
-    padding:25px;
-    margin-top:60px;
-    box-shadow:0 -2px 10px rgba(0,0,0,.08);
+/* Author + Date */
+
+.blog-meta {
+    display: flex;
+
+    gap: 12px;
+
+    margin-bottom: 15px;
+
+    font-size: 13px;
+
+    color: #6b7a90;
 }
 
-/*==========================
-    Add Blog Page
-===========================*/
 
-main{
-    padding:40px 20px;
+/* Blog Content */
+
+.blog-excerpt {
+    color: #4d6078;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    margin: 0 0 12px;
+
+    word-break: break-word;
+
+    overflow-wrap: anywhere;
 }
 
-.page-header{
-    text-align:center;
-    margin-bottom:50px;
-}
 
-.page-header h1{
-    font-size:48px;
-    margin-bottom:10px;
-}
+/* Read More */
 
-.page-header p{
-    color:#666;
-    font-size:18px;
-}
+.read-more-btn {
+    background: none;
 
-.form-container{
-    width:90%;
-    max-width:900px;
-    margin:auto;
-    background:white;
-    padding:40px;
-    border-radius:15px;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
+    border: none;
 
-label{
-    display:block;
-    margin-top:20px;
-    margin-bottom:8px;
-    font-weight:600;
-}
+    padding: 0;
 
-input,
-textarea{
-    width:100%;
-    padding:14px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    font-size:16px;
-    box-sizing:border-box;
-    transition:.3s;
-}
-
-textarea{
-    min-height:250px;
-    resize:vertical;
-    line-height:1.6;
-}
-
-input:focus,
-textarea:focus{
-    outline:none;
-    border-color:#2563eb;
-    box-shadow:0 0 8px rgba(37,99,235,.2);
-}
-
-#title{
-    font-size:22px;
-    font-weight:600;
-}
-
-#charCount{
-    text-align:right;
-    font-size:14px;
-    color:#666;
-    margin:5px 0;
-}
-
-input[type="file"]{
-    margin-top:10px;
-}
-
-.form-container button{
-    width:100%;
-    margin-top:30px;
-    padding:15px;
-    background:#2563eb;
-    color:white;
-    border:none;
-    border-radius:8px;
-    font-size:18px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.form-container button:hover{
-    background:#1d4ed8;
-}
-
-.error{
-    color:#dc3545;
-    font-size:14px;
-    margin-top:5px;
-    margin-bottom:15px;
-    font-weight:500;
-}
-
-.success {
-    display: none;
-    background: #d1fae5;
-    color: #065f46;
-    padding: 12px;
-    border-radius: 8px;
     margin-bottom: 20px;
-    text-align: center;
-    font-weight: bold;
-}
 
-.no-blogs {
+    align-self: flex-start;
 
-    text-align: center;
-    padding: 40px;
-
-    font-size: 22px;
-    font-weight: 600;
-
-    color: #777;
-
-}
-.blog-date {
+    color: #5b8fdc;
 
     font-size: 14px;
-    color: #777;
-    margin: 10px 0;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.read-more-btn:hover {
+    color: #3d73bd;
+
+    text-decoration: underline;
+}
+
+
+/* Buttons */
+
+.blog-actions {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: auto;
+}
+
+
+.edit-btn,
+.delete-btn {
+    border: none;
+
+    padding: 11px 15px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.edit-btn {
+    background: #5b8fdc;
+
+    color: white;
+}
+
+.edit-btn:hover {
+    background: #477bc5;
+}
+
+
+.delete-btn {
+    background: #ef5145;
+
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #d94136;
+}
+
+
+/* No Blogs */
+
+.no-blogs {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    background: white;
+
+    padding: 45px 20px;
+
+    border-radius: 16px;
+
+    color: #60748a;
+
+    box-shadow: 0 8px 25px rgba(20, 40, 70, 0.08);
+}
+
+
+/* ==========================
+   RESPONSIVE BLOG GRID
+========================== */
+
+@media (max-width: 900px) {
+
+    .blog-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .blog-container {
+        grid-template-columns: 1fr;
+
+        width: 90%;
+    }
+
+    .blog-image {
+        height: 220px;
+    }
+}
+/* ==========================
+   NAVBAR LOGO
+========================== */
+
+.logo {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    transition: 0.3s ease;
+}
+
+.logo:hover {
+    color: #6f9fdb;
+    transform: translateY(-1px);
+}
+/* ==========================
+   RESPONSIVE BLOG GRID
+========================== */
+
+@media (max-width: 900px) {
+
+    .blog-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
 }
 
-.blog-actions{
 
-    display:flex;
+@media (max-width: 600px) {
 
-    gap:10px;
+    .blog-container {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+    }
 
-    margin-top:auto;
+    .logo {
+        font-size: 23px;
+    }
 
-    padding-top:20px;
+    .blog-card > img {
+        height: 200px;
+    }
 
-}
-
-.blog-actions button{
-
-    flex:1;
-
-    margin:0;
-
-    width:auto;
-
-    padding:12px;
-
-    border:none;
-
-    border-radius:8px;
-
-    color:white;
-
-    font-size:15px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.3s;
+    .blog-actions {
+        flex-direction: column;
+    }
 
 }
+.read-more-btn {
+    border: none;
+    background: none;
+    color: var(--primary-color);
 
-.edit-btn{
+    font-size: 14px;
+    font-weight: 600;
 
-    background:#4f8df7;
+    cursor: pointer;
 
+    padding: 0;
+    margin: 0 0 15px;
+
+    text-align: left;
 }
 
-.edit-btn:hover{
-
-    background:#2d6cdf;
-
-}
-
-.delete-btn{
-
-    background:#e74c3c;
-
-}
-
-.delete-btn:hover{
-
-    background:#c0392b;
-
+.read-more-btn:hover {
+    color: #5d8fd2;
+    text-decoration: underline;
 }
