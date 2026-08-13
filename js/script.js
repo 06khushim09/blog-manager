@@ -292,10 +292,10 @@ blogs.forEach(blog => {
                     </button>
 
                     <button
-                        class="delete-btn"
-                        onclick="deleteBlog(${blog.id}, '${blog.title.replace(/'/g, "\\'")}')">
-                        Delete
-                    </button>
+    class="delete-btn"
+    onclick="deleteBlog(${blog.id})">
+    Delete
+</button>
 
                 </div>
 
@@ -357,61 +357,52 @@ function goToEdit(id) {
 // Delete Blog
 // ============================
 
-async function deleteBlog(id,title) {
+async function deleteBlog(id) {
 
     const result = await Swal.fire({
-    title: "Delete Blog?",
-html: `Are you sure you want to delete <strong>"${title}"</strong>?`,    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#e74c3c",
-    cancelButtonColor: "#6c757d",
-    confirmButtonText: "Yes, Delete",
-    cancelButtonText: "Cancel"
-});
-
-if (!result.isConfirmed) {
-    return;
-}
-
-    const response = await fetch(`/blogs/${id}`, {
-        method: "DELETE"
+        title: "Delete Blog?",
+        text: "You won't be able to recover this blog.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, Delete It",
+        cancelButtonText: "Cancel"
     });
 
-    const data = await response.json();
-
-    // Show success message
-    const deleteSuccess = document.getElementById("deleteSuccess");
-
-    if (deleteSuccess) {
-
-        deleteSuccess.textContent = data.message;
-        deleteSuccess.style.display = "block";
-
-        setTimeout(() => {
-            deleteSuccess.style.display = "none";
-        }, 2000);
-
+    if (!result.isConfirmed) {
+        return;
     }
 
-    const card = document.getElementById(`blog-${id}`);
+    try {
 
-if (card) {
+        const response = await fetch(`/blogs/${id}`, {
+            method: "DELETE"
+        });
 
-    card.style.opacity = "0";
-    card.style.transform = "scale(0.9)";
+        if (!response.ok) {
+            throw new Error("Failed to delete blog");
+        }
 
-    setTimeout(() => {
+        await Swal.fire({
+            title: "Deleted!",
+            text: "Blog deleted successfully!",
+            icon: "success"
+        });
+
+        // Reload the blog list
         loadBlogs();
-    }, 300);
 
-} else {
+    } catch (error) {
 
-    loadBlogs();
+        console.error("Delete error:", error);
 
+        Swal.fire({
+            title: "Error!",
+            text: "Unable to delete the blog.",
+            icon: "error"
+        });
+    }
 }
-}
 
-// ============================
 // Load Blog For Editing
 // ============================
 
