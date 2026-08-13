@@ -214,11 +214,12 @@ Screenshots of the application can be added here.
 Example:
 
 ```markdown
-![Home Page](screenshots/home.png)
+![Home Page](image-2.png)
 
-![Add Blog](screenshots/add-blog.png)
+![Add Blog](image.png)
 
-![Blog List](screenshots/blog-list.png)
+![Blog List](image-1.png)
+
 ```
 
 ---
